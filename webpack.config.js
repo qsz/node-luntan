@@ -4,6 +4,7 @@
 var webpack = require('webpack')
 
 module.exports = {
+    devtool: 'eval-source-map',
     entry:  __dirname + "/src/main3.js",//已多次提及的唯一入口文件
     output: {
         path: __dirname + "/public",//打包后的文件存放的地方
@@ -32,7 +33,10 @@ module.exports = {
             {
                 test: /\.(js|jsx)$/,
                 exclude: /node_modules/, //不需要处理的文件夹
-                loader: 'babel'
+                loader: 'babel',
+                query: {
+                    presets: ['es2015', 'react']
+                }
             },
             {
                 test: /\.css$/,
