@@ -53,11 +53,27 @@ class Home extends Component {
         super(props);
         this.state = {
             create_at: '',
-            isTopic:true
+            isTopic:true,
+            avatar_url:'',
+            loginname:'',
+            score:'',
+            recent_replies:[],
+            recent_topics:[]
         };
 
     }
-    componentDidMount() {
+    componentWillMount(){ //此处要优化，为什么会这样。。。
+        if(this.props.da){
+            this.setState({
+                avatar_url:this.props.da.avatar_url,
+                loginname:this.props.da.loginname,
+                score:this.props.da.score,
+                recent_replies:this.props.da.recent_replies,
+                recent_topics:this.props.da.recent_topics
+            })
+        }else{
+            return false
+        }
 
     }
     changeTab(e){
@@ -74,14 +90,12 @@ class Home extends Component {
         }
     }
     render() {
-        const {avatar_url, loginname, score, recent_replies, recent_topics, create_at} = this.props.da;
-        const headImg = avatar_url;
         return (
             <div className="user-pannel">
                 <div className="user-info">
-                    <div className="user-headimg" style={{backgroundImage: 'url(' + headImg + ')'}}></div>
+                    <div className="user-headimg" style={{backgroundImage: 'url(' + this.state.avatar_url + ')'}}></div>
                     <div className="loginname">
-                        <span>昵称:{loginname}&nbsp;&nbsp;&nbsp;积分:{score}</span>
+                        <span>昵称:{this.state.loginname}&nbsp;&nbsp;&nbsp;积分:{this.state.score}</span>
                     </div>
                 </div>
                 <ul className="tab-nav">
@@ -91,8 +105,8 @@ class Home extends Component {
                 <ul className="user-list">
                     {
                         this.state.isTopic ?
-                            recent_topics.map((item, index) =><Homeli  {...item} key={index} />):
-                            recent_replies.map((item, index) =><Homeli  {...item} key={index} />)
+                            this.state.recent_topics.map((item, index) =><Homeli  {...item} key={index} />):
+                            this.state.recent_replies.map((item, index) =><Homeli  {...item} key={index} />)
                     }
                 </ul>
                 
@@ -111,11 +125,7 @@ class Main extends Component {
 
     }
     componentDidMount() {
-        console.log('localS',localStorage.username);
-
         this.state.dispatch(fetchUser(this.state.username));
-
-
         // if(!this.props.items.data){
         //     fetchUser(this.state.username)
         // }

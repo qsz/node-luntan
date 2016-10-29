@@ -135,10 +135,26 @@ class Article extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            create_at: ''
+            create_at: '',
+            avatar_url:'',
+            loginname:'',
+            replies:[]
         };
     }
-    componentDidMount() {  //此处要优化
+
+    componentWillMount(){ //此处要优化，为什么会这样。。。
+        if(this.props.author){
+            this.setState({
+                avatar_url:this.props.author.avatar_url,
+                loginname:this.props.author.loginname,
+                replies:this.props.replies
+            })
+        }else{
+            return false
+        }
+
+    }
+    componentDidMount() {
         const dateBegin = this.props.create_at;
         var dateDiff = Tool.GetDateDiff(dateBegin);
         this.setState({
@@ -156,10 +172,10 @@ class Article extends Component{
         return (
             <div>
                 <div className="user clear">
-                    <div className="user-headimg" style={{backgroundImage: 'url(' + author.avatar_url + ')'}}></div>
+                    <div className="user-headimg" style={{backgroundImage: 'url(' + this.state.avatar_url + ')'}}></div>
                     <div className="data">
                         <div>
-                            <a className="name" href="#">{author.loginname}</a>
+                            <a className="name" href="#">{this.state.loginname}</a>
                             <time>{this.state.create_at}</time>
                         </div>
                         <div className="qt">
@@ -170,7 +186,7 @@ class Article extends Component{
                 </div>
                 <h2 className="topic-tit">{title}</h2>
                 <div className="markdown-body" dangerouslySetInnerHTML={createMarkup()}></div>
-                <ReplyList reply={replies}></ReplyList>
+                <ReplyList reply={this.state.replies}></ReplyList>
             </div>
         )
     }
@@ -193,7 +209,7 @@ class Topic extends Component {
             <div>
                 <Header title="详情" back="y"/>
                 {
-                    this.props.isFetching ?<Loading loading={this.props.isFetching}></Loading> : <div className="article-box"><Article  {...this.props.article.data}/><ReplyBox></ReplyBox></div>
+                    this.props.isFetching? <Loading loading={this.props.isFetching}></Loading> : <div className="article-box"><Article  {...this.props.article.data}/><ReplyBox></ReplyBox></div>
                 }
             </div>
         );

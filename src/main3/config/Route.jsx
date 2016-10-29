@@ -1,7 +1,6 @@
 import { Router, Route, hashHistory,browserHistory,IndexRoute, Link, IndexLink ,IndexRedirect } from 'react-router';
 import React, {Component, PropTypes} from 'react';
 import ReactDOM from 'react-dom';
-import NProgress from 'nprogress';
 import Roots from '../components/Roots';
 
 import IndexList from '../components/IndexList.jsx'  //首页组件

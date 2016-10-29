@@ -3,10 +3,6 @@ import React, {Component, PropTypes} from 'react';
 import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
 
-import NProgress from 'nprogress';
-
-
-
 class Roots extends Component {
     render() {
         return (

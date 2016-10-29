@@ -83,7 +83,7 @@ class HeaderInit extends Component {
                 }
                 <h2 className="title" data-flex-box="1">{title}</h2>
                 {
-                    out ?<a href="/#/signout" className="out"><i className="iconfont">&#xe66a;</i></a>:null
+                    out ?<a href="#/signout" className="out"><i className="iconfont">&#xe66a;</i></a>:null
                 }
             </header>
         )
