@@ -4,7 +4,8 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "dev": "webpack-dev-server --progress --profile --colors --hot --inline"
+    "dev": "webpack-dev-server --progress --profile --colors --hot --inline",
+    "build": "webpack --progress --profile --colors"
   },
   "author": "qsz",
   "license": "ISC",
@@ -22,7 +23,6 @@
     "webpack-dev-server": "^1.16.1"
   },
   "dependencies": {
-    "babel-preset-react-hmre": "^1.1.1",
     "es6-promise": "^4.0.5",
     "jquery": "^1.11.2",
     "object-assign": "^4.1.0",
@@ -30,10 +30,8 @@
     "react-dom": "^15.3.2",
     "react-redux": "^4.4.5",
     "react-router": "^2.8.1",
-    "react-transform-hmr": "^1.0.4",
     "redux": "^3.6.0",
     "redux-logger": "^2.7.0",
-    "redux-thunk": "^2.1.0",
-    "simple-module": "^3.0.3"
+    "redux-thunk": "^2.1.0"
   }
 }
