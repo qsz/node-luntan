@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import ReactDOM,{render} from 'react-dom';
 import {connect} from 'react-redux';
 import {Footer,Header,TipMsg} from './common/Index';
-import { fetchUser } from '../Action/Index';
+import { fetchUser,fetchUserView } from '../Action/Index';
 import Loading from './common/Loading';
 import Tool from '../tools/Tools.jsx'
 
@@ -28,7 +28,7 @@ class Homeli extends Component {
     }
     componentWillReceiveProps(nextProps) {
         const lastBegin = nextProps.last_reply_at;
-        const lastDiff = this.GetDateDiff(lastBegin);
+        const lastDiff = Tool.GetDateDiff(lastBegin);
         this.state = {
             last_reply_at:lastDiff,
             title:nextProps.title,
@@ -109,7 +109,7 @@ class Home extends Component {
                             this.state.recent_replies.map((item, index) =><Homeli  {...item} key={index} />)
                     }
                 </ul>
-                
+
             </div>
         );
     }
@@ -119,27 +119,43 @@ class Main extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: localStorage.username,
-            dispatch: this.props.dispatch
+            myname: localStorage.username,
+            dispatch: this.props.dispatch,
+            isMe:true,
+            userName:this.props.location.pathname.split('/').pop()
         };
 
     }
-    componentDidMount() {
-        this.state.dispatch(fetchUser(this.state.username));
+    componentDidMount(){
+        const myName = this.state.myname;
+        if( this.state.userName != myName){
+            this.state.dispatch(fetchUserView(this.state.userName));
+            this.setState({
+                isMe:false
+            })
+        } else{
+            this.state.dispatch(fetchUser(myName));
+        }
         // if(!this.props.items.data){
         //     fetchUser(this.state.username)
         // }
     }
-    
     render() {
-        const data = this.props.items.data;
+        let data = this.props.items.data;
+        let isFetching = this.props.isFetching;
+        if(!this.state.isMe){
+            isFetching = this.props.user_isFetching;
+            data = this.props.user_items.data;
+        }
         return (
             <div>
-                <Header title="个人中心" out="y"/>
+                <Header title={this.state.isMe ? '个人中心': this.state.userName+'的个人中心'} back={this.state.isMe ? null:'y'} out={this.state.isMe ? 'y':null}/>
                 {
-                    this.props.isFetching ? <Loading loading={this.props.isFetching}></Loading>:<Home da={data}></Home>
+                    isFetching ? <Loading loading={isFetching}></Loading>:<Home da={data}></Home>
                 }
-                <Footer index="3"></Footer>
+                {
+                    !this.state.isMe ? null : <Footer index="3"></Footer>
+                }
             </div>
         );
     }
@@ -153,13 +169,26 @@ function user_mapStateToProps(state) {
         isFetching: true,
         items: []
     };
+    const {
+        user_isFetching,
+        user_items
+    } = state.UserView || {
+        user_isFetching: true,
+        user_items: []
+    };
     return {
         isFetching,
-        items
+        items,
+        user_isFetching,
+        user_items
     }
 }
+
 
 const UserView = connect(user_mapStateToProps)(Main);
 
 export default UserView;
+
+
+
 

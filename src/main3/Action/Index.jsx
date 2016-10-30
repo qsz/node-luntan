@@ -152,3 +152,26 @@ export function fetchUser(loginname){
         });
     };
 }
+
+
+export function fetchUserView(loginname){
+    return (dispatch,getState)  => {
+        dispatch({type: 'REQUEST_USERVIEW'});
+        console.log('find user');
+        let url = 'https://cnodejs.org/api/v1/user/'+loginname ;
+        return $.ajax({
+            url: url,
+            data:'',
+            type:'GET',
+            success: json => {
+                dispatch({
+                    type:'RECEIVE_USERVIEW',
+                    posts: json
+                });
+            },
+            error: (err) => {
+                alert('加载失败')
+            }
+        });
+    };
+}

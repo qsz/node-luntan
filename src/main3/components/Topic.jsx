@@ -88,7 +88,7 @@ class Reply extends Component {
                </div>
                <div className="main">
                    <div className="mn">
-                       <a className="name" href="#">{author.loginname}</a>
+                       <a className="name" href={'#user/'+author.loginname}>{author.loginname}</a>
                        <time>{this.state.create_at}</time>
                        <div className="lou">
                            <span>#{index+1}</span>
@@ -161,7 +161,7 @@ class Article extends Component{
             create_at:dateDiff
         })
     }
-    
+
     render() {
         const{id, title, visit_count, reply_count, content, replies, author} = this.props;
         const createMarkup = () => {
@@ -175,7 +175,7 @@ class Article extends Component{
                     <div className="user-headimg" style={{backgroundImage: 'url(' + this.state.avatar_url + ')'}}></div>
                     <div className="data">
                         <div>
-                            <a className="name" href="#">{this.state.loginname}</a>
+                            <a className="name" href={'#user/'+this.state.loginname}>{this.state.loginname}</a>
                             <time>{this.state.create_at}</time>
                         </div>
                         <div className="qt">
@@ -193,6 +193,12 @@ class Article extends Component{
 }
 
 
+
+
+
+
+
+
 class Topic extends Component {
     constructor(props) {
         super(props);
@@ -200,7 +206,7 @@ class Topic extends Component {
             dispatch: this.props.dispatch
         };
     }
-    componentDidMount() {
+    componentWillMount() {
         const id = this.props.location.pathname.split('/').pop();
         this.state.dispatch(fetchTopic(id));
     }

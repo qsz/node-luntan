@@ -44,8 +44,6 @@ class Nav extends Component {
 
 
 
-
-
 class Main extends Component {
     constructor(props) {
         super(props);
@@ -65,7 +63,6 @@ class Main extends Component {
         window.scrollTo(0,offsetY);
         window.addEventListener('scroll', this.startLoad.bind(this));//滚动加载
     }
-
     componentWillReceiveProps(nextProps) {
         if(this.props.location.query.tab != nextProps.location.query.tab){
             this.setState({
@@ -79,16 +76,15 @@ class Main extends Component {
             })
         }
     }
-
     componentWillUnmount(){
         this.state.dispatch({type:'setY',setY:window.pageYOffset})  //此处要优化
     }
-
     startLoad(){
         const $load = this.refs.load;
+        const maxH = document.documentElement.clientHeight+40;
         if($load){
             if($load.getBoundingClientRect()){
-                if( $load.getBoundingClientRect().top <= 700 && $load.getBoundingClientRect().top>=200 ) {
+                if( $load.getBoundingClientRect().top <= maxH && $load.getBoundingClientRect().top>=200 ) {
                     if(!this.props. isFetching){
                         const items = this.props.items;
                         const tab = this.props.location.query.tab;
@@ -107,7 +103,7 @@ class Main extends Component {
                 {
                     !this.props.items.data ? null:<CellView title="全部" items={this.props.items} />
                 }
-                <Footer ref="footer" index="0" />
+                <Footer index="0" />
                 <div ref="load">
                     <Loading mag={this.state.mag} loading={this.props.isFetching}></Loading>
                 </div>

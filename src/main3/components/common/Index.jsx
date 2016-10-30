@@ -75,16 +75,37 @@ class HeaderInit extends Component {
         window.history.back(-1);
     }
     render(){
-        const{title,back,out} = this.props;
+        const{title,back,backclear,out} = this.props;
+        let left = null;
+        if(back){
+            left =(
+                <span className="back" onClick={this.goBack}>
+                    <i className="iconfont">&#xe64c;</i>
+                </span>
+            )
+        }
+        
+        if(backclear){
+            left = (
+                <span className="back" onClick={this.goBack}>
+                    <i className="iconfont">&#xe64c;</i>
+                </span>
+            )
+        }
+        
+        let right = null;
+        if(out){
+            right = (
+                <a href="#/signout" className="out">
+                    <i className="iconfont">&#xe66a;</i>
+                </a>
+            )
+        }
         return(
             <header className="common-header">
-                {
-                    back ? <span className="back" onClick={this.goBack}><i className="iconfont">&#xe64c;</i></span>:null
-                }
+                {left}
                 <h2 className="title" data-flex-box="1">{title}</h2>
-                {
-                    out ?<a href="#/signout" className="out"><i className="iconfont">&#xe66a;</i></a>:null
-                }
+                {right}
             </header>
         )
         

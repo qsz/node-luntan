@@ -82,10 +82,36 @@ const User = (state={
 }
 
 
+const UserView = (state={
+    user_isFetching: false,
+    user_items: []
+}, action) => {
+    switch (action.type) {
+        case 'REQUEST_USERVIEW':
+            return objectAssign({}, state,{
+                user_isFetching: true,
+                user_items:[]
+            });
+        case 'RECEIVE_USERVIEW':
+            return objectAssign({}, state,{
+                user_isFetching: false,
+                user_items:action.posts
+            });
+        default:
+            return state;
+    }
+}
+
+
 const rootReducer = combineReducers({
     postIssues,
     Topic,
-    User
+    User,
+    UserView
 })
 export default rootReducer 
+
+
+
+
 

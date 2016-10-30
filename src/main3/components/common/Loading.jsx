@@ -39,29 +39,37 @@ class Loading extends Component {
 
     }
     render(){
+        const slide = (
+            <div>
+                <div className="slide">
+                    <ul>
+                        <li className="circle1 circle"></li>
+                        <li className="long"></li>
+                        <li className="circle2 circle"></li>
+                    </ul>
+                </div>
+                <div className="slide">
+                    <ul>
+                        <li className="circle1 circle"></li>
+                        <li className="long"></li>
+                        <li className="circle2 circle"></li>
+                    </ul>
+                </div>
+                <div className="slide">
+                    <ul>
+                        <li className="circle1 circle"></li>
+                        <li className="long"></li>
+                        <li className="circle2 circle"></li>
+                    </ul>
+                </div>
+            </div>
+        )
         return(
             <div className={ this.state.loading ? 'loading-box':'not-loading'} id={this.state.mag}>
-                <div className="slide">
-                    <ul>
-                        <li className="circle1 circle"></li>
-                        <li className="long"></li>
-                        <li className="circle2 circle"></li>
-                    </ul>
-                </div>
-                <div className="slide">
-                    <ul>
-                        <li className="circle1 circle"></li>
-                        <li className="long"></li>
-                        <li className="circle2 circle"></li>
-                    </ul>
-                </div>
-                <div className="slide">
-                    <ul>
-                        <li className="circle1 circle"></li>
-                        <li className="long"></li>
-                        <li className="circle2 circle"></li>
-                    </ul>
-                </div>
+                {
+                    this.state.loading ? slide : <h3>上拉加载</h3>
+
+                }
             </div>
         )
 
