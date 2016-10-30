@@ -2,11 +2,16 @@ import React, {Component, PropTypes} from 'react';
 import {Router, Route, IndexRoute, browserHistory, Link} from 'react-router';
 import {connect} from 'react-redux';
 import action from '../../Action/Index';
+import { fetchIssuesIfNeeded } from '../../Action/Index';
+
 
 
 class FooterInit extends Component {
     constructor(props) {
         super(props);
+    }
+    refresh(){
+        this.props.dispatch(fetchIssuesIfNeeded());
     }
     render() {
         var arr = [];
@@ -14,7 +19,7 @@ class FooterInit extends Component {
         return (
             <footer className="common-footer">
                 <ul className="menu">
-                    <li className={arr[0]}>
+                    <li className={arr[0]} onClick={this.refresh.bind(this)}>
                         <Link to="/">
                             <i className="iconfont icon-shouye">&#xe631;</i>
                             首页
@@ -50,15 +55,17 @@ FooterInit.defaultProps = {  //初始属性
 function footer_mapStateToProps(state) {
     const {
         isFetching,
-        items
-    } = state || {
+        items,
+        offsetY
+    } = state.postIssues || {
         isFetching: true,
-        items: []
+        items: [],
+        offsetY:0
     };
-
     return {
         isFetching,
-        items
+        items,
+        offsetY
     }
 }
 
