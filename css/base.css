@@ -679,6 +679,16 @@ ul, menu, dir {
     margin-top: 80px;
     text-align: center;
     background-color: #f8f8ff;
+    min-height: 105px;
+}
+
+.not-loading{
+    margin-top: 80px;
+    height: 90px;
+    width: 100%;
+    color: #909090;
+    text-align: center;
+    background-color: #f8f8ff;
 }
 
 #loading-up{
