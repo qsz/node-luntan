@@ -3,7 +3,7 @@
 
 ##版本号1.0
 ####效果查看
-![网址](https://qsz.github.io/node-luntan) <br>
+[网址](https://qsz.github.io/node-luntan) <br>
 ![扫描二维码](https://github.com/qsz/node-luntan/blob/gh-pages/photo/QQ%E5%9B%BE%E7%89%8720161030223340.png) <br>
 ####部分效果图
 ![首页 ](https://github.com/qsz/node-luntan/blob/gh-pages/photo/home.PNG) <br>
