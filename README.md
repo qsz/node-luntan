@@ -14,8 +14,8 @@
 
 ###下载
 git clone https://github.com/qsz/node-luntan<br>
-cd node-luntan
-npm install 
+cd node-luntan<br>
+npm install <br>
 
 ###主要功能
 1.主题分类，列表、帖子查看<br>
