@@ -5,9 +5,17 @@
 ###效果查看
 * [网址](https://qsz.github.io/node-luntan/ "悬停显示") 
 * ![扫描二维码](https://github.com/qsz/node-luntan/blob/gh-pages/photo/QQ%E5%9B%BE%E7%89%8720161030223340.png) 
-* 部分效果图
-1.首页 ![](https://github.com/qsz/node-luntan/blob/gh-pages/photo/home.PNG)  
+部分效果图
+![首页 ](https://github.com/qsz/node-luntan/blob/gh-pages/photo/home.PNG)  
+![发表主题 ](https://github.com/qsz/node-luntan/blob/gh-pages/photo/createreply.PNG)  
+![查看帖子 ](https://github.com/qsz/node-luntan/blob/gh-pages/photo/topic.PNG)  
+![查看评论 ](https://github.com/qsz/node-luntan/blob/gh-pages/photo/replylist.PNG)  
+![个人资料 ](https://github.com/qsz/node-luntan/blob/gh-pages/photo/user.PNG)  
 
+###下载
+git clone https://github.com/qsz/node-luntan<br>
+cd node-luntan
+npm install 
 
 ###主要功能
 1.主题分类，列表、帖子查看<br>
